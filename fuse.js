@@ -3,6 +3,7 @@ const fuse = FuseBox.init({
   homeDir: 'src',
   target: 'browser',
   output: './dist/$name.js',
+  sourceMaps: true,
   plugins: [
     WebIndexPlugin({ template: './src/index.html' }),
   ],

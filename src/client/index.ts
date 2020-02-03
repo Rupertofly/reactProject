@@ -1,4 +1,4 @@
 console.log( 'boo' );
 if ( true ) {
-  console.log( 'bbom' );
+  console.log( 'boom' );
 }

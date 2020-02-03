@@ -13,5 +13,7 @@
   },
 
   "env": { "browser": true, "commonjs": true, "node": true },
-  "rules": {}
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "off"
+  }
 }

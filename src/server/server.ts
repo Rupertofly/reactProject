@@ -1,1 +1,1 @@
-console.table([`blah`]);
+console.table( [`blah`] );

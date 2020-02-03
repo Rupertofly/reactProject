@@ -64,5 +64,5 @@
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
   },
   "typeAcquisition": { "enable": true },
-  "include": ["./src/*"]
+  "files": ["src/"]
 }

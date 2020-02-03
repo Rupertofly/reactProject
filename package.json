@@ -1,13 +1,15 @@
 {
-  "name": "reactProject",
+  "name": "react-project",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "server.js",
   "repository": "git@github.com:Rupertofly/reactProject.git",
   "author": "Ruby Quail",
   "license": "MIT",
   "scripts": {
     "dev": "node fuse.js",
-    "launchChrome": "/Applications/Chromium.app/Contents/MacOS/Chromium --app=http://localhost:8080"
+    "launchChrome": "/Applications/Chromium.app/Contents/MacOS/Chromium --app=http://localhost:8080 --remote-debugging-port=9222",
+    "test": "node ./tests.js",
+    "start": "node ./server.js"
   },
   "private": false,
   "dependencies": {
@@ -16,6 +18,9 @@
     "typescript": "^3.7.5"
   },
   "devDependencies": {
-    "fuse-box": "^3.7.1"
+    "fuse-box": "^3.7.1",
+    "source-map": "^0.7.3",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
   }
 }

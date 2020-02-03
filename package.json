@@ -6,7 +6,8 @@
   "author": "Ruby Quail",
   "license": "MIT",
   "scripts": {
-    "dev": "node fuse.js"
+    "dev": "node fuse.js",
+    "launchChrome": "/Applications/Chromium.app/Contents/MacOS/Chromium --app=http://localhost:8080"
   },
   "private": false,
   "dependencies": {

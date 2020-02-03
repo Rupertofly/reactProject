@@ -12,5 +12,6 @@ fuse.dev({ port: 8080 });
 fuse
   .bundle('app')
   .instructions('> index.ts')
+  .hmr()
   .watch();
 fuse.run();

@@ -1,2 +1,2 @@
-// TODO: add SM
+require('source-map-support').install();
 require('./dist/server');

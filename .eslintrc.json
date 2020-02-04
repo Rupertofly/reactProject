@@ -15,5 +15,11 @@
   "env": { "browser": true, "commonjs": true, "node": true },
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "off"
+  },
+  "globals": {
+    "process": false,
+    "console": false,
+    "IS_PRODUCTION": false,
+    "IS_DEVELOPMENT": false
   }
 }

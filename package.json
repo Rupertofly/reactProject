@@ -9,15 +9,19 @@
     "dev": "node fuse.js",
     "launchChrome": "/Applications/Chromium.app/Contents/MacOS/Chromium --app=http://localhost:8080 --remote-debugging-port=9222",
     "test": "node ./tests.js",
-    "start": "node ./server.js"
+    "start": "node ./server.js",
+    "dev:start": "gulp server:dev"
   },
   "private": false,
   "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^2.0.4",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "typescript": "^3.7.5"
   },
   "devDependencies": {
+    "@types/express": "^4.17.2",
     "@types/react": "^16.9.19",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",

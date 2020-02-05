@@ -47,9 +47,9 @@ function createConfig(isDebug) {
     else {
     }
     return {
-        mode: isDebug ? "development" : "production",
+        mode: isDebug ? 'development' : 'production',
         name: 'client',
-        devtool: devTool,
+        devtool: devTool || undefined,
         optimization: {
             splitChunks: {
                 cacheGroups: {
@@ -81,5 +81,5 @@ function createConfig(isDebug) {
         plugins: plugins
     };
 }
+exports.createConfig = createConfig;
 exports["default"] = createConfig(process.env.NODE_ENV !== 'production');
-exports.create = createConfig;

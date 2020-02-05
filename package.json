@@ -15,6 +15,7 @@
   "private": false,
   "dependencies": {
     "express": "^4.17.1",
+    "font-awesome": "^4.7.0",
     "lodash": "^4.17.15",
     "pug": "^2.0.4",
     "react": "^16.12.0",
@@ -43,6 +44,7 @@
     "gulp-typescript": "^6.0.0-alpha.1",
     "gulp-util": "^3.0.8",
     "json-loader": "^0.5.7",
+    "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
     "prettier": "^1.19.1",
     "react-hot-loader": "^4.12.19",

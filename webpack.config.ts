@@ -3,9 +3,10 @@ import { Configuration as Options } from 'webpack';
 import * as path from 'path';
 import * as _ from 'lodash';
 import * as webpack from 'webpack';
-import ExtractText from 'extract-text-webpack-plugin';
+import * as ExtractText from 'mini-css-extract-plugin';
+
 const vendor = ['lodash'];
-function createConfig( isDebug: boolean ): Options {
+export function createConfig( isDebug: boolean ): Options {
   const devTool = isDebug ? 'cheap-module-source-map' : null;
   const plugins = [
     new webpack.DefinePlugin( {
@@ -45,11 +46,12 @@ function createConfig( isDebug: boolean ): Options {
   let publicPath = '/dist/';
   if ( isDebug ) {
   } else {
+
   }
   return {
-    mode: isDebug ? "development" : "production",
+    mode: isDebug ? 'development' : 'production',
     name: 'client',
-    devtool: devTool,
+    devtool: devTool || undefined,
     optimization: {
       splitChunks: {
         cacheGroups: {
@@ -78,8 +80,7 @@ function createConfig( isDebug: boolean ): Options {
     module: {
       rules: _.values( loaders ),
     },
-    plugins
+    plugins,
   };
 }
 export default createConfig( process.env.NODE_ENV !== 'production' );
-exports.create = createConfig;

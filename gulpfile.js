@@ -5,6 +5,12 @@ const ts = require('gulp-typescript');
 const sm = require('gulp-sourcemaps');
 const rm = require('rimraf');
 const nm = require('gulp-nodemon');
+const cl = require('./webpack.config.js');
+const wb = require('webpack');
+/* ---------------------------------- */
+/* SERVER                             */
+/* ---------------------------------- */
+
 gulp.task('server:clean', cb => {
   rm('./dist', () => cb());
 });
@@ -28,10 +34,7 @@ function watchServer() {
     .watch('./src/server/**/*.ts', gulp.series('server:build'))
     .on('error', () => {});
 }
-gulp.task(
-  'server:watch',
-  gulp.series('server:build', watchServer)
-);
+gulp.task('server:watch', gulp.series('server:build', watchServer));
 gulp.task(
   'server:dev',
   gulp.series(
@@ -44,3 +47,28 @@ gulp.task(
     })
   )
 );
+
+/* ---------------------------------- */
+/* CLIENT                             */
+/* ---------------------------------- */
+const consoleStats = {
+  colors: true,
+  exclude: ['node_modules'],
+  chunks: false,
+  assets: false,
+  timings: false,
+  modules: false,
+  hash: false,
+  version: false,
+};
+gulp.task('client:build',cb => buildClient(cb,cl.createConfig(false)))
+function buildClient(cb,cl) {
+  wb(cl,(err,stats) => {
+    if (err) {
+      cb(err)
+      return;
+    }
+    console.log(stats.toString(consoleStats));
+    cb();
+  })
+}

@@ -1,12 +1,14 @@
 /* eslint-disable */
 const gulp = require('gulp');
+const cp = require('child_process');
 const gc = require('gulp-changed');
 const ts = require('gulp-typescript');
 const sm = require('gulp-sourcemaps');
 const rm = require('rimraf');
 const nm = require('gulp-nodemon');
 const cl = require('./webpack.config.js');
-const wb = require('webpack');
+const webpack = require('webpack');
+const ge = require('gulp-exec');
 /* ---------------------------------- */
 /* SERVER                             */
 /* ---------------------------------- */
@@ -34,7 +36,7 @@ function watchServer() {
     .watch('./src/server/**/*.ts', gulp.series('server:build'))
     .on('error', () => {});
 }
-gulp.task('server:watch', gulp.series('server:build', watchServer));
+gulp.task('server:run', gulp.series('server:build', watchServer));
 gulp.task(
   'server:dev',
   gulp.series(
@@ -56,19 +58,34 @@ const consoleStats = {
   exclude: ['node_modules'],
   chunks: false,
   assets: false,
-  timings: false,
+  timings: true,
   modules: false,
   hash: false,
   version: false,
 };
-gulp.task('client:build',cb => buildClient(cb,cl.createConfig(false)))
-function buildClient(cb,cl) {
-  wb(cl,(err,stats) => {
+gulp.task('client:clean', cb => {
+  rm('./public/dist', () => cb());
+});
+gulp.task(
+  'client:build',
+  gulp.series('client:clean', cb => buildClient(cb, cl.default))
+);
+gulp.task('client:run', gulp.series('client:clean', watchClient));
+function buildClient(cb, cl) {
+  webpack(cl(true), (err, stats) => {
     if (err) {
-      cb(err)
+      cb(err);
       return;
     }
     console.log(stats.toString(consoleStats));
     cb();
-  })
+  });
 }
+function watchClient(cb) {
+  return cp.exec('yarn webpack-dev-server --config webpack.config.js');
+}
+
+/* ---------------------------------- */
+/* RUN TASKS                          */
+/* ---------------------------------- */
+gulp.task('run', gulp.parallel('server:run', 'client:run'));

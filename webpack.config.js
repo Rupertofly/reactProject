@@ -1,26 +1,71 @@
-/* eslint-disable */
-
-const webpack = require('webpack');
-const path = require('path');
-const mec = require('mini-css-extract-plugin');
-
-/** @type {webpack.Configuration} */
-const config = {
-  entry: './src/client/index.ts',
-  output: {
-    path: path.resolve(__dirname, 'public/dist'),
-    filename: 'main.js',
-    mode: process.env.NODE_ENV,
-  },
-  module: {
-    rules: [
-      {
-        test: /\.scss$/,
-        use:
-          process.env.NODE_ENV !== 'production'
-            ? ['style-loader', 'css-loader', 'sass-loader']
-            : [mec.loader, 'style-loader', 'css-loader', 'sass-loader'],
-      },
-    ],
-  },
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const path_1 = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const configFunction = (prod = false) => {
+    const plugins = [];
+    prod &&
+        plugins.push(new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[id].css',
+        }));
+    const config = {
+        mode: prod ? 'production' : 'development',
+        devtool: prod ? undefined : 'eval-source-map',
+        entry: { app: prod ? './src/client/client.ts' : ['webpack-dev-server/client?http://localhost:8080', 'webpack/hot/only-dev-server', './src/client/client.ts'] },
+        output: {
+            path: path_1.resolve(__dirname, 'public', 'dist'),
+            filename: '[name].js',
+            publicPath: prod ? '/dist/' : 'http://localhost:8080/dist/',
+        },
+        plugins,
+        module: {
+            rules: [
+                { test: /\.tsx?$/, use: ['ts-loader'] },
+                {
+                    test: /\.scss$/,
+                    use: prod
+                        ? [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+                        : ['style-loader', 'css-loader', 'sass-loader'],
+                },
+                {
+                    test: /\.json$/,
+                    loader: 'json-loader',
+                },
+                {
+                    test: /\.css$/,
+                    use: prod
+                        ? [MiniCssExtractPlugin.loader, 'css-loader']
+                        : ['style-loader', 'css-loader'],
+                },
+                {
+                    test: /\.(png|jpg|jpeg|gif|woff|ttf|eot|svg|woff2)/,
+                    loader: {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 5000,
+                        },
+                    },
+                },
+            ],
+        },
+        optimization: {
+            splitChunks: {
+                chunks: 'all',
+            },
+        },
+    };
+    return {
+        ...config, devServer: {
+            publicPath: '/dist/',
+            hot: true,
+            // host: 'localhost',
+            headers: {
+                "Access-Control-Allow-Origin": "http://localhost:3000"
+            },
+            port: 8080,
+            stats: 'minimal'
+        }
+    };
 };
+exports.default = configFunction;

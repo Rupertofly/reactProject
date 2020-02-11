@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as http from 'http';
+
 // import { isDevelopment } from './settings';
 const isDevelopment = process.env.NODE_ENV !== "production"
 /* ---------------------------------- */
@@ -8,13 +9,13 @@ const isDevelopment = process.env.NODE_ENV !== "production"
 
 const app = express();
 const server = new http.Server( app );
-
 /* config --------------------------- */
 
 app.set( 'view engine', 'pug' )
+
 app.use( express.static( "public" ) );
 const useExternalStyles = !isDevelopment;
-const scriptRoot = isDevelopment ? 'http://localhost:8080/dist' : '/build'
+const scriptRoot = isDevelopment ? 'http://localhost:8080/public/dist/' : '/build'
 app.get( '*', ( req, res ) => {
 
   res.render( 'index', {

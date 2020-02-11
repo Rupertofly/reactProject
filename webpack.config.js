@@ -11,12 +11,12 @@ const configFunction = (prod = false) => {
         }));
     const config = {
         mode: prod ? 'production' : 'development',
-        devtool: prod ? undefined : 'eval-source-map',
+        devtool: prod ? undefined : '#eval-source-map',
         entry: { app: prod ? './src/client/client.ts' : ['webpack-dev-server/client?http://localhost:8080', 'webpack/hot/only-dev-server', './src/client/client.ts'] },
         output: {
             path: path_1.resolve(__dirname, 'public', 'dist'),
             filename: '[name].js',
-            publicPath: prod ? '/dist/' : 'http://localhost:8080/dist/',
+            publicPath: prod ? '/dist/' : 'http://localhost:8080/public/dist/',
         },
         plugins,
         module: {
@@ -49,22 +49,21 @@ const configFunction = (prod = false) => {
                 },
             ],
         },
-        optimization: {
-            splitChunks: {
-                chunks: 'all',
-            },
+        resolve: {
+            extensions: ['.ts', '.tsx', '.js']
         },
+        optimization: {},
     };
     return {
         ...config, devServer: {
-            publicPath: '/dist/',
+            // publicPath: '/public/dist',
+            contentBase: '/',
             hot: true,
             // host: 'localhost',
             headers: {
-                "Access-Control-Allow-Origin": "http://localhost:3000"
+                "Access-Control-Allow-Origin": "http://localhost:3000",
             },
             port: 8080,
-            stats: 'minimal'
         }
     };
 };

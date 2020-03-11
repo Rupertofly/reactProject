@@ -25,7 +25,7 @@
       "type": "node",
       "request": "attach",
       "port": 9229,
-      "addressl": "localhost",
+      "address": "localhost",
       "sourceMaps": true,
       "restart": false,
       "outFiles": ["${workspaceFolder}/dist/*"]

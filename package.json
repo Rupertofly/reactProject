@@ -1,53 +1,52 @@
 {
-  "name": "react-project",
-  "version": "1.0.0",
-  "main": "server.js",
-  "repository": "git@github.com:Rupertofly/reactProject.git",
-  "author": "Ruby Quail",
-  "license": "MIT",
-  "scripts": {
-    "dev": "node fuse.js",
-    "launchChrome": "/Applications/Chromium.app/Contents/MacOS/Chromium --app=http://localhost:8080 --remote-debugging-port=9222",
-    "test": "node ./tests.js",
-    "start": "node ./server.js",
-    "dev:start": "gulp server:dev"
-  },
-  "private": false,
-  "dependencies": {
-    "express": "^4.17.1",
-    "font-awesome": "^4.7.0",
-    "gulp-exec": "^4.0.0",
-    "lodash": "^4.17.15",
-    "pug": "^2.0.4",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "ts-node": "^8.6.2",
-    "typescript": "^3.7.5"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.2",
-    "@types/lodash": "^4.14.149",
-    "@types/mini-css-extract-plugin": "^0.9.0",
-    "@types/node": "^13.7.0",
-    "@types/react": "^16.9.19",
-    "@types/react-dom": "^16.9.5",
-    "@typescript-eslint/eslint-plugin": "^2.18.0",
-    "@typescript-eslint/parser": "^2.18.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-react": "^7.18.3",
-    "fuse-box": "^3.7.1",
-    "gulp": "^4.0.2",
-    "gulp-changed": "^4.0.2",
-    "gulp-sourcemap": "^1.0.1",
-    "gulp-sourcemaps": "^2.6.5",
-    "gulp-typescript": "^6.0.0-alpha.1",
-    "gulp-util": "^3.0.8",
-    "node-sass": "^4.13.1",
-    "prettier": "^1.19.1",
-    "rimraf": "^3.0.1",
-    "source-map": "^0.7.3",
-    "source-map-support": "^0.5.16"
-  }
+    "name": "ruby2020artproject",
+    "version": "1.0.0",
+    "description": "a repo for my art-y projects",
+    "main": "src/index.js",
+    "repository": "git@github.com:Rupertofly/Ruby2020artproject.git",
+    "author": "Ruby Quail <ruby@rubyquail.design>",
+    "license": "MIT",
+    "scripts": {
+        "build": "webpack-dev-server -D"
+    },
+    "source": "src/index.ts",
+    "targets": {
+        "context": "browser",
+        "includeNodeModules": true,
+        "sourceMap": {
+            "inlineSources": true
+        }
+    },
+    "dependencies": {
+        "@rupertofly/capture-client": "^1.1.1",
+        "@rupertofly/noise": "^1.0.2",
+        "d3": "^5.15.0",
+        "d3-delaunay": "^5.2.1",
+        "lodash": "^4.17.15"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.8.4",
+        "@rollup/plugin-typescript": "^3.0.0",
+        "@types/d3": "^5.7.2",
+        "@typescript-eslint/eslint-plugin": "^2.20.0",
+        "@typescript-eslint/parser": "^2.20.0",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.10.0",
+        "eslint-plugin-prettier": "^3.1.2",
+        "eslint-plugin-react": "^7.18.3",
+        "eslint-plugin-tsdoc": "^0.2.3",
+        "prettier": "^1.19.1",
+        "source-map-loader": "^0.2.4",
+        "ts-loader": "^6.2.1",
+        "tslib": "^1.11.0",
+        "typescript": "^3.7.5",
+        "typescript-eslint": "^0.0.1-alpha.0",
+        "webpack": "^4.41.6",
+        "webpack-cli": "^3.3.11",
+        "webpack-dev-server": "^3.10.3"
+    },
+    "prettier": {
+        "singleQuote": true,
+        "tabWidth": 4
+    }
 }
